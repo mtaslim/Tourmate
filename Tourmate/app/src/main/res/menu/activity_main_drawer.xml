@@ -16,7 +16,9 @@
         android:checkableBehavior="all">
         <item android:id="@+id/nav_my_profile" android:icon="@drawable/ic_user"
             android:title="My Profile" />
+        <!--
         <item android:id="@+id/nav_sign_out" android:icon="@drawable/ic_logout"
             android:title="Signout" />
+        -->
     </group>
 </menu>

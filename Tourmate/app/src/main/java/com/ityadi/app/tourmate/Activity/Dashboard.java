@@ -11,16 +11,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ityadi.app.tourmate.ApiHelper.UserInfoApi;
+import com.ityadi.app.tourmate.Common.Config;
+import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.Common.SpreferenceHelper;
 import com.ityadi.app.tourmate.R;
+import com.ityadi.app.tourmate.Response.UserInfoResponse;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +38,12 @@ public class Dashboard extends AppCompatActivity
 
     NavigationView navigationView = null;
     Toolbar toolbar = null;
+
+    String uName = "";
+    String uEmail = "";
+    String uPhoto = "";
+    String uCreated = "";
+    String uUpdated = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,17 +80,36 @@ public class Dashboard extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        //How to change elements in the header programatically
-        View headerView = navigationView.getHeaderView(0);
-        TextView emailText = (TextView) headerView.findViewById(R.id.email);
-        emailText.setText("mtaslim@email.com");
+        ///////////// fech user data from database
+        UserInfoApi userInfoApi = Network.createService(UserInfoApi.class);
+        Call<UserInfoResponse> call = userInfoApi.getAccessToken(Config.APP_KEY,userName);
+        call.enqueue(new Callback<UserInfoResponse>() {
+            @Override
+            public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
+                UserInfoResponse userInfoResponse = response.body();
+                uName = userInfoResponse.getName();
+                uEmail = userInfoResponse.getEmail();
+                uPhoto = userInfoResponse.getPhoto();
+                uCreated = userInfoResponse.getCreated_at();
+                uUpdated = userInfoResponse.getUpdated_at();
 
-        CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image);
-        String profile_image_url ="http://job.com.bd/images/logo.gif";
+                //How to change elements in the header programatically
+                View headerView = navigationView.getHeaderView(0);
+                //TextView usernameTV = (TextView) headerView.findViewById(R.id.username);
+                TextView nameTV = (TextView) headerView.findViewById(R.id.nameTV);
+                CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image);
 
-        Picasso.with(getApplicationContext()).load(profile_image_url)
-                .placeholder(R.drawable.camera).error(R.drawable.user)
-                .into(profile_image);
+                //usernameTV.setText(uName);
+                nameTV.setText(uName);
+                String profile_image_url ="http://app.ityadi.com/tourmate/photo/small/"+uPhoto;
+                Picasso.with(getApplicationContext()).load(profile_image_url).into(profile_image);
+
+            }
+            @Override
+            public void onFailure(Call<UserInfoResponse> call, Throwable t) {
+                Log.e("error", t.toString());
+            }
+        });
 
 
 
@@ -133,8 +166,6 @@ public class Dashboard extends AppCompatActivity
         } else if (id == R.id.nav_weather) {
 
         } else if (id == R.id.nav_my_profile) {
-
-        } else if (id == R.id.nav_sign_out) {
 
         }
 

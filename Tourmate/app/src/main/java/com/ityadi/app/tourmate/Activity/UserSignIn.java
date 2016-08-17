@@ -8,10 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.ityadi.app.tourmate.Common.Config;
 import com.ityadi.app.tourmate.Common.InternetConnection;
 import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.Common.SpreferenceHelper;
-import com.ityadi.app.tourmate.Common.UserLoginApi;
+import com.ityadi.app.tourmate.ApiHelper.UserLoginApi;
 import com.ityadi.app.tourmate.R;
 import com.ityadi.app.tourmate.Response.UserResponse;
 
@@ -61,7 +62,7 @@ public class UserSignIn extends AppCompatActivity {
             }
             else{
                 UserLoginApi userLoginApi = Network.createService(UserLoginApi.class);
-                Call<UserResponse> call = userLoginApi.getAccessToken(username,password);
+                Call<UserResponse> call = userLoginApi.getAccessToken(Config.APP_KEY,username,password);
 
                 call.enqueue(new Callback<UserResponse>() {
                     @Override

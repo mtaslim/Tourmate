@@ -14,12 +14,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.ityadi.app.tourmate.Common.Config;
 import com.ityadi.app.tourmate.Common.CurrentTime;
 import com.ityadi.app.tourmate.Common.EmailValidation;
 import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.Common.SpreferenceHelper;
-import com.ityadi.app.tourmate.Common.UserApi;
-import com.ityadi.app.tourmate.Common.UserApiWithoutPhoto;
+import com.ityadi.app.tourmate.ApiHelper.UserApi;
+import com.ityadi.app.tourmate.ApiHelper.UserApiWithoutPhoto;
 import com.ityadi.app.tourmate.PhotoLibrary.PhotoLibrary;
 import com.ityadi.app.tourmate.R;
 import com.ityadi.app.tourmate.Response.UserResponse;
@@ -151,11 +152,11 @@ public class UserAccountCreation extends AppCompatActivity {
                 File file = new File(realPath);
                 RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                 MultipartBody.Part body =  MultipartBody.Part.createFormData("uploaded_file", file.getName(), requestFile);
-                call = userApi.getAccessToken(name,username,password,email,body);
+                call = userApi.getAccessToken(Config.APP_KEY,name,username,password,email,body);
             }
             else{
                 UserApiWithoutPhoto userApiWithoutPhoto = Network.createService(UserApiWithoutPhoto.class);
-                call = userApiWithoutPhoto.getAccessToken(name,username,password,email);
+                call = userApiWithoutPhoto.getAccessToken(Config.APP_KEY,name,username,password,email);
             }
 
 

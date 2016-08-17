@@ -14,7 +14,7 @@ public class SpreferenceHelper {
     public static final String USER = "username";
 
     public SpreferenceHelper(Context context) {
-        sharedPreferences = context.getSharedPreferences("batch_15",Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("tourmate",Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 

@@ -1,4 +1,4 @@
-package com.ityadi.app.tourmate.Common;
+package com.ityadi.app.tourmate.ApiHelper;
 
 import com.ityadi.app.tourmate.Response.UserResponse;
 
@@ -14,6 +14,7 @@ public interface UserLoginApi {
     @Multipart
     @POST("tourmate/userLogin.php")
     Call<UserResponse> getAccessToken(
+            @Part("appkey") String appkey,
             @Part("username") String username,
             @Part("password") String password
     );
