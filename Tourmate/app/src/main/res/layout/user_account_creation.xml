@@ -2,6 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
+    android:background="#fff"
+    android:id="@+id/uacLayout"
     android:layout_height="fill_parent">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,7 +16,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Activity.UserAccountCreation"
-    android:background="@drawable/bg"
+    android:background="@drawable/my_shape"
     android:id="@+id/parentView">
 
     <EditText

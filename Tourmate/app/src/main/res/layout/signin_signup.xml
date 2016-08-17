@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:gravity="center_vertical"
-    android:background="@drawable/bg"
+    android:background="@color/black"
     tools:context=".Activity.SigninSignup">
 
 
@@ -17,6 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/my_shape"
+        android:padding="50dp"
         android:layout_marginBottom="20dp">
         <Button
             android:id="@+id/btnLogin"
@@ -24,19 +27,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/sin"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_below="@+id/layout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-    <Button
-        android:id="@+id/btnSignup"
-        android:onClick="SignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/sup"/>
+        <Button
+            android:id="@+id/btnSignup"
+            android:onClick="SignUp"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sup"/>
     </LinearLayout>
 
 

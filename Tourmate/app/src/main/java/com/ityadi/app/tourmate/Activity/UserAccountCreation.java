@@ -7,14 +7,15 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.ityadi.app.tourmate.Common.CurrentTime;
+import com.ityadi.app.tourmate.Common.EmailValidation;
 import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.Common.SpreferenceHelper;
 import com.ityadi.app.tourmate.Common.UserApi;
@@ -44,6 +45,7 @@ public class UserAccountCreation extends AppCompatActivity {
     String timeStamp,realPath="";
 
     public Uri fileUri;
+    View thisLayout;
 
     CurrentTime currentTime = new CurrentTime();
     Call<UserResponse> call;
@@ -60,8 +62,10 @@ public class UserAccountCreation extends AppCompatActivity {
         timeStamp = new SimpleDateFormat("yyyMMdd_HHmm", Locale.ENGLISH).format(new Date());
         currentTime.setTimestamp(timeStamp.toString());
 
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
+        thisLayout = findViewById(R.id.uacLayout);
+
+        //getSupportActionBar().setDisplayShowCustomEnabled(true);
+       // getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
 
         inputData();
     }
@@ -119,15 +123,21 @@ public class UserAccountCreation extends AppCompatActivity {
         username = editTextUsername.getText().toString();
         password = editTextPassword.getText().toString();
         email = editTextEmail.getText().toString();
+        boolean emailValidation = EmailValidation.checkEmail(email);
 
         String req="";
-        if("".equals(name)) req+= "Name,";
-        if("".equals(username)) req+= "Username,";
-        if("".equals(password)) req+= "Password,";
-        if("".equals(email)) req+= "Email,";
+        if("".equals(name)) req+= "Name, ";
+        if("".equals(username)) req+= "Username, ";
+        if("".equals(password)) req+= "Password, ";
+        if("".equals(email)) req+= "Email, ";
+
+
         if(req.length()>0) {
-            req = req.substring(0,req.length()-1);
-            Toast.makeText(getBaseContext(),req+" is required", Toast.LENGTH_LONG).show();
+            req = req.substring(0,req.length()-2)+" is required";
+            Snackbar.make(thisLayout,req,Snackbar.LENGTH_LONG).show();
+        }
+        else if(!emailValidation) {
+            Snackbar.make(thisLayout,R.string.email_invalid,Snackbar.LENGTH_LONG).show();
         }
         else{
             final ProgressDialog progressDialog;
@@ -160,17 +170,12 @@ public class UserAccountCreation extends AppCompatActivity {
                     String err = userResponse.getErr();
 
                     if(!"".equals(msg)){
-                        Toast.makeText(getBaseContext(),msg,Toast.LENGTH_LONG).show();
+                        Snackbar.make(thisLayout,msg,Snackbar.LENGTH_LONG).show();
                         spreferenceHelper.save(userName);
                         Intent i = new Intent(getBaseContext(), Dashboard.class);
                         startActivity(i);
                     }
-                    else {
-                        Toast.makeText(getBaseContext(),err,Toast.LENGTH_LONG).show();
-                    }
-
-
-                    //if(!"".equals(msg)) check for null or empty
+                    else Snackbar.make(thisLayout,err,Snackbar.LENGTH_LONG).show();
                     Log.e("response", userResponse.getMsg());
                 }
 

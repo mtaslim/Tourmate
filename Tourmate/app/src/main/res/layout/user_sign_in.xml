@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/signinLayout"
+    android:background="@color/black">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:gravity="center_vertical"
-    android:background="@drawable/bg"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
     tools:context="com.ityadi.app.tourmate.Activity.UserSignIn">
+
+<LinearLayout
+    android:id="@+id/logoContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/logo2"/>
+</LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -17,13 +36,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".Activity.UserAccountCreation"
         android:background="@drawable/my_shape"
+        android:layout_below="@+id/logoContainer"
         android:id="@+id/parentView">
+
 
         <TextView
             android:layout_width="match_parent"
@@ -32,8 +53,7 @@
             android:textSize="25dp"
             android:padding="10dp"
             android:background="#eee"
-
-
+            android:textStyle="bold"
             />
         <EditText
             android:id="@+id/editTextUsername"
@@ -63,13 +83,5 @@
 
     </LinearLayout>
 
-
-
-
-
-
-
-
-
-
 </RelativeLayout>
+</ScrollView>
