@@ -26,7 +26,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:src="@drawable/logo2"/>
 </LinearLayout>
 
@@ -36,15 +35,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".Activity.UserAccountCreation"
-        android:background="@drawable/my_shape"
         android:layout_below="@+id/logoContainer"
         android:id="@+id/parentView">
 
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_below="@+id/logoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/my_shape">
 
         <TextView
             android:layout_width="match_parent"
@@ -60,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
+            android:layout_margin="10dp"
             android:textSize="25dp" />
 
         <EditText
@@ -67,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:layout_margin="10dp"
             android:inputType="textPassword"
             android:textSize="25dp" />
 
@@ -75,13 +80,45 @@
             android:id="@+id/btnLogin"
             android:gravity="center"
             android:onClick="SignIn"
+            android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/sin"/>
-
-        <!-- android:onClick="addUser" -->
-
     </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_below="@+id/logoContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/my_shape">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New User Signup"
+                android:textSize="25dp"
+                android:padding="10dp"
+                android:background="#eee"
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/btnSignup"
+                android:onClick="SignUp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sup"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
 
 </RelativeLayout>
 </ScrollView>

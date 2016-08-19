@@ -1,6 +1,7 @@
 package com.ityadi.app.tourmate.Activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ityadi.app.tourmate.Common.InternetConnection;
+import com.ityadi.app.tourmate.Common.InternetConnectionHandler;
 import com.ityadi.app.tourmate.R;
 
 public class TravelEventFragment extends Fragment {
@@ -22,6 +25,11 @@ public class TravelEventFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        //Internet checking for all Fragement
+        if (!InternetConnection.checkConnection(getActivity())){
+            startActivity(new Intent(getActivity(), InternetConnectionHandler.class));
+        }
+
         View rootView = inflater.inflate(R.layout.travel_event_fragment, container, false);
         tvDate = (TextView) rootView.findViewById(R.id.tvDate);
 

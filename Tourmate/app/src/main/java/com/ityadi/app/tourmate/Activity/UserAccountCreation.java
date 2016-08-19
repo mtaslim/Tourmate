@@ -14,13 +14,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.ityadi.app.tourmate.ApiHelper.UserApi;
+import com.ityadi.app.tourmate.ApiHelper.UserApiWithoutPhoto;
 import com.ityadi.app.tourmate.Common.Config;
 import com.ityadi.app.tourmate.Common.CurrentTime;
 import com.ityadi.app.tourmate.Common.EmailValidation;
 import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.Common.SpreferenceHelper;
-import com.ityadi.app.tourmate.ApiHelper.UserApi;
-import com.ityadi.app.tourmate.ApiHelper.UserApiWithoutPhoto;
 import com.ityadi.app.tourmate.PhotoLibrary.PhotoLibrary;
 import com.ityadi.app.tourmate.R;
 import com.ityadi.app.tourmate.Response.UserResponse;
@@ -63,13 +63,16 @@ public class UserAccountCreation extends AppCompatActivity {
         timeStamp = new SimpleDateFormat("yyyMMdd_HHmm", Locale.ENGLISH).format(new Date());
         currentTime.setTimestamp(timeStamp.toString());
 
-        thisLayout = findViewById(R.id.uacLayout);
+        thisLayout = findViewById(R.id.userAccountCreation);
 
         //getSupportActionBar().setDisplayShowCustomEnabled(true);
        // getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
 
         inputData();
     }
+
+
+
     public void inputData(){
         editTextName = (EditText)findViewById(R.id.editTextName);
         editTextUsername = (EditText)findViewById(R.id.editTextUsername);
@@ -191,21 +194,9 @@ public class UserAccountCreation extends AppCompatActivity {
     }
 
     public void SigninSignup(View view) {
-        Intent i = new Intent(getBaseContext(), SigninSignup.class);
+        Intent i = new Intent(getBaseContext(), UserSignIn.class);
         startActivity(i);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

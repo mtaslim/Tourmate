@@ -4,7 +4,9 @@ package com.ityadi.app.tourmate.Response;
  * Created by taslim on 8/12/2016.
  */
 public class UserResponse {
-    private String username,msg,err;
+    private String username;
+    private String msg;
+    private String err;
 
     public String getUsername() {
         return username;

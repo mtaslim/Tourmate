@@ -2,23 +2,51 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:background="#fff"
-    android:id="@+id/uacLayout"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:id="@+id/userAccountCreation">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Activity.UserAccountCreation"
     android:background="@drawable/my_shape"
     android:id="@+id/parentView">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/title">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="SigninSignup"
+            android:src="@drawable/back"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="New User Signup"
+            android:textColor="#fff"
+            android:padding="10dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
@@ -65,8 +93,7 @@
         android:layout_gravity="center"
         android:background="@drawable/sup"
         android:textSize="25dp" />
-
-    <!-- android:onClick="addUser" -->
-
-</LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
 </ScrollView>
+

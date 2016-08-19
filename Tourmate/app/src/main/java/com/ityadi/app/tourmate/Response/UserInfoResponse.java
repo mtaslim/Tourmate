@@ -4,7 +4,12 @@ package com.ityadi.app.tourmate.Response;
  * Created by Mobile App Develop on 17-8-16.
  */
 public class UserInfoResponse {
-    String name,email,photo,created_at,updated_at,last_login;
+    private String name;
+    private String email;
+    private String photo;
+    private String created_at;
+    private String updated_at;
+    private String last_login;
 
     public String getName() {
         return name;

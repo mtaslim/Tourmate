@@ -32,18 +32,21 @@ public class UserSignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_sign_in);
 
+        spreferenceHelper = new SpreferenceHelper(this);
+        String userName = spreferenceHelper.retrive();
+
+        if(!"".equals(userName)) {
+            Intent i = new Intent(getBaseContext(), Dashboard.class);
+            startActivity(i);
+        }
+
        // getSupportActionBar().setDisplayShowCustomEnabled(true);
        // getSupportActionBar().setCustomView(R.layout.action_bar_signin);
 
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 
-        spreferenceHelper = new SpreferenceHelper(this);
         signinLayout = findViewById(R.id.signinLayout);
-    }
-    public void SigninSignup(View view) {
-        Intent i = new Intent(getBaseContext(), SigninSignup.class);
-        startActivity(i);
     }
 
     public void SignIn(View view) {
@@ -91,9 +94,19 @@ public class UserSignIn extends AppCompatActivity {
 
         }
          else {
-            Snackbar.make(signinLayout,"Internet connection is not available.", Snackbar.LENGTH_INDEFINITE).show();
+            Snackbar.make(signinLayout,"Internet connection is not available.", Snackbar.LENGTH_LONG).show();
         }
 
+    }
+
+
+    public void SignUp(View view) {
+        if (InternetConnection.checkConnection(getBaseContext())) {
+            Intent i = new Intent(getBaseContext(), UserAccountCreation.class);
+            startActivity(i);
+        } else {
+            Snackbar.make(signinLayout,"Internet connection is not available.", Snackbar.LENGTH_LONG).show();
+        }
     }
 
 }

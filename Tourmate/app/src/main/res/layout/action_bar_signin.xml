@@ -14,9 +14,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:onClick="SigninSignup"/>
-
-
-
         <TextView
             android:layout_width="0dp"
             android:layout_weight="5"
@@ -27,10 +24,5 @@
             android:layout_centerHorizontal="true"
             android:textSize="25dp"
             android:text="User Sign in"/>
-
-
-
-
-
     </TableRow>
 </TableLayout>

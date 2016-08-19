@@ -3,7 +3,7 @@
 
     <group  android:id="@+id/menu_bottom1"
         android:checkableBehavior="single">
-        <item android:id="@+id/nav_travel_event" android:icon="@drawable/ic_travel_event"
+        <item android:id="@+id/nav_travel_list_event" android:icon="@drawable/ic_travel_event"
             android:title="Travel Event" />
         <item android:id="@+id/nav_nearby" android:icon="@drawable/ic_nearby"
             android:title="Nearby" />
