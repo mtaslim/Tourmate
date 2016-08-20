@@ -29,7 +29,8 @@
         <activity android:name=".Activity.SigninSignup" />
         <activity android:name=".Activity.UserSignIn" />
         <!-- UserSignIn -->
-        <activity android:name=".Activity.Dashboard" />
+        <activity android:name=".Activity.Dashboard"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"/>
         <activity
             android:name=".Common.InternetConnectionHandler"
             android:label="@string/title_activity_internet_connection_handler"

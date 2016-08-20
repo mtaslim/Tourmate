@@ -35,12 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Event Name"
+            android:layout_marginBottom="10dp"
             android:textSize="25dp" />
 
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Journey Date"
             android:textSize="25dp" />
 
@@ -49,6 +51,7 @@
             android:id="@+id/etLocationCoverage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Location Coverage"
             android:textSize="25dp" />
 
@@ -56,6 +59,7 @@
             android:id="@+id/etBudgetAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Budget Amount"
             android:inputType="number"
             android:textSize="25dp" />
@@ -64,6 +68,7 @@
             android:id="@+id/etDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Description"
             android:textSize="25dp" />
 
@@ -72,10 +77,15 @@
             android:id="@+id/btnShowDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:textAllCaps="false"
             android:layout_gravity="center"
-            android:text="Create Travel Event"
+            android:text=" Create Travel Event"
+            android:textStyle="bold"
             android:onClick="CreateTravelEvent"
+            android:drawableLeft="@drawable/ic_plus"
+            android:textColor="@color/colorPrimary"
+            android:padding="15dp"
             android:textSize="25dp" />
 
 

@@ -33,11 +33,9 @@ import com.ityadi.app.tourmate.Common.SpreferenceHelper;
 import com.ityadi.app.tourmate.R;
 import com.ityadi.app.tourmate.Response.TravelEventResponse;
 import com.ityadi.app.tourmate.Response.UserInfoResponse;
-import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,6 +58,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     String CUR_DATE = "";
     private int year, month, day;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +103,18 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     //Change elements in the header
                     View headerView = navigationView.getHeaderView(0);
                     TextView nameTV = (TextView) headerView.findViewById(R.id.nameTV);
-                    CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image);
+                    //CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image);
 
                     nameTV.setText(uName);
-                    String profile_image_url = "http://app.ityadi.com/tourmate/photo/small/" + uPhoto;
-                    Picasso.with(getApplicationContext()).load(profile_image_url).into(profile_image);
+
+
+                   /* if("".equals(uPhoto)) {
+                       // uPhoto =
+                    }
+                    else {
+                        String profile_image_url = Config.BASE_URL+"tourmate/photo/small/" + uPhoto;
+                        Picasso.with(getApplicationContext()).load(profile_image_url).into(profile_image);
+                    }*/
                 }
 
                 @Override
@@ -116,6 +122,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     Log.e("error", t.toString());
                 }
             });
+
+
+
+
+
 
             Calendar c = Calendar.getInstance();
             year = c.get(Calendar.YEAR);
@@ -161,6 +172,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         int id = item.getItemId();
 
         if (id == R.id.nav_travel_list_event) {
+
+
             TravelEventListFragment fragment = new TravelEventListFragment();
             FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
@@ -296,5 +309,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             startActivity(new Intent(getBaseContext(), InternetConnectionHandler.class));
         }
     }
+
+
 
 }

@@ -48,7 +48,7 @@ public class TravelEventFragment extends Fragment {
             }
         });
 
-
+        ((Dashboard) getActivity()).setTitle("Create Travel Event");
         ((Dashboard) getActivity()).fab.hide();
         return rootView;
     }
