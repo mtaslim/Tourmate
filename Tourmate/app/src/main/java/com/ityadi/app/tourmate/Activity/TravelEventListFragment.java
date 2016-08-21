@@ -11,14 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.ityadi.app.tourmate.ApiHelper.TravelEventListApi;
 import com.ityadi.app.tourmate.Common.Config;
-import com.ityadi.app.tourmate.Common.CustomListAdapter;
 import com.ityadi.app.tourmate.Common.InternetConnection;
 import com.ityadi.app.tourmate.Common.InternetConnectionHandler;
 import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.Common.SpreferenceHelper;
+import com.ityadi.app.tourmate.Common.TravelEventAdapter;
 import com.ityadi.app.tourmate.R;
 import com.ityadi.app.tourmate.Response.Example;
 
@@ -85,14 +86,17 @@ public class TravelEventListFragment extends Fragment {
                         journeyDate.add(myConvertedDate);
                     }
 
-                    CustomListAdapter adapter = new CustomListAdapter(getActivity(), eventName, journeyDate, budgetAmount);
+                    TravelEventAdapter adapter = new TravelEventAdapter(getActivity(), eventName, journeyDate, budgetAmount);
                     list = (ListView) getView().findViewById(R.id.travelEventListView);
                     list.setAdapter(adapter);
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             // String Slecteditem = itemname[+position];
-                            // Toast.makeText(getActivity(), Slecteditem, Toast.LENGTH_SHORT).show();
+                             Toast.makeText(getActivity(), "Slecteditem", Toast.LENGTH_SHORT).show();
+
+
+
                         }
                     });
                 }
@@ -113,10 +117,6 @@ public class TravelEventListFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
-
-
-
-
 
 
 }
