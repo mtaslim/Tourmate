@@ -8,15 +8,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ityadi.app.tourmate.R;
-import com.ityadi.app.tourmate.Response.Example;
+import com.ityadi.app.tourmate.Response.CurrentWeatherArrayList;
 
 
 public class TravelEventListAdapter extends BaseAdapter {
   private Context context;
-    private Example allTravel;
+    private CurrentWeatherArrayList allTravel;
     private final LayoutInflater mInflater;
 
-    public TravelEventListAdapter(Context context, Example allTravel) {
+    public TravelEventListAdapter(Context context, CurrentWeatherArrayList allTravel) {
         super(context, R.layout.list_row,allTravel);
         mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context=context;

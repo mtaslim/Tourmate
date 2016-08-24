@@ -99,6 +99,11 @@ public class UserSignIn extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(false);
+    }
+
 
     public void SignUp(View view) {
         if (InternetConnection.checkConnection(getBaseContext())) {

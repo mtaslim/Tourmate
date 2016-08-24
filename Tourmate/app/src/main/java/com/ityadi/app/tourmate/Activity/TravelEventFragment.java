@@ -16,7 +16,7 @@ import com.ityadi.app.tourmate.R;
 
 public class TravelEventFragment extends Fragment {
 
-    TextView tvDate;
+    TextView etJourneyDate;
     String selectedDate;
 
     public TravelEventFragment() {
@@ -31,10 +31,10 @@ public class TravelEventFragment extends Fragment {
         }
 
         View rootView = inflater.inflate(R.layout.travel_event_fragment, container, false);
-        tvDate = (TextView) rootView.findViewById(R.id.tvDate);
+        etJourneyDate = (TextView) rootView.findViewById(R.id.etJourneyDate);
 
         //final Button showDate = (Button) rootView.findViewById(R.id.btnShowDate);
-        tvDate.setOnClickListener(new View.OnClickListener() {
+        etJourneyDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((Dashboard) getActivity()).setDate();
@@ -42,7 +42,7 @@ public class TravelEventFragment extends Fragment {
                     @Override
                     public void run() {
                         selectedDate = ((Dashboard) getActivity()).CUR_DATE;
-                        tvDate.setText(selectedDate);
+                        etJourneyDate.setText(selectedDate);
                     }
                 }, 5000);
             }

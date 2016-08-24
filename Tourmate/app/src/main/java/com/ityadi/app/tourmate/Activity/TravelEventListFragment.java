@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.ityadi.app.tourmate.ApiHelper.TravelEventListApi;
 import com.ityadi.app.tourmate.Common.Config;
@@ -50,6 +49,7 @@ public class TravelEventListFragment extends Fragment {
             startActivity(new Intent(getActivity(), InternetConnectionHandler.class));
         }
         View view = inflater.inflate(R.layout.travel_event_list_fragment, container, false);
+
         ((Dashboard) getActivity()).fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +68,7 @@ public class TravelEventListFragment extends Fragment {
         call.enqueue(new Callback<Example>() {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
-                Example travelList = response.body();
+                final Example travelList = response.body();
                 if(travelList != null) {
                     List<String> eventName = new ArrayList<String>();
                     List<String> journeyDate = new ArrayList<String>();
@@ -90,13 +90,23 @@ public class TravelEventListFragment extends Fragment {
                     list = (ListView) getView().findViewById(R.id.travelEventListView);
                     list.setAdapter(adapter);
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            // String Slecteditem = itemname[+position];
-                             Toast.makeText(getActivity(), "Slecteditem", Toast.LENGTH_SHORT).show();
+                        public void onItemClick(AdapterView<?> a, View v, int position,
+                                                long id) {
 
+                            Bundle bundle = new Bundle();
+                            bundle.putString("eventId", travelList.getTravelEvent().get(position).getId());
+                            bundle.putString("eventName", travelList.getTravelEvent().get(position).getEventName());
+                            bundle.putString("journeyDate", travelList.getTravelEvent().get(position).getJourneyDate());
+                            bundle.putString("locationCoverage", travelList.getTravelEvent().get(position).getLocationCoverage());
+                            bundle.putString("budgetAmount", travelList.getTravelEvent().get(position).getBudgetAmount());
+                            bundle.putString("description", travelList.getTravelEvent().get(position).getDescription());
+                            bundle.putString("createdAt", travelList.getTravelEvent().get(position).getCreatedAt());
+                            bundle.putString("updatedAt", travelList.getTravelEvent().get(position).getUpdatedAt());
 
-
+                            Fragment fr = new TravelEventDetails();
+                            fr.setArguments(bundle);
+                            FragmentManager frm = getFragmentManager();
+                            frm.beginTransaction().replace(R.id.fragment_container, fr).commit();
                         }
                     });
                 }
@@ -107,6 +117,10 @@ public class TravelEventListFragment extends Fragment {
                 Log.e("error", t.toString());
             }
         });
+
+
+
+
 
 
 

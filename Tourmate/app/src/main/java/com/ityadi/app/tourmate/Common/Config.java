@@ -5,5 +5,6 @@ package com.ityadi.app.tourmate.Common;
  */
 public class Config {
     public static String BASE_URL = "http://taslim.trackingsol.com/";
+    public static String WEATHER_BASE_URL ="http://api.openweathermap.org/";
     public static String APP_KEY = "BASIS_MAPP_BATCH15_EASY_DEVELOPER";
 }

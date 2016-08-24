@@ -20,4 +20,12 @@ public class Network {
 
         return retrofit.create(serviceClass);
     }
+    public static <S> S createWeatherService(Class<S> serviceClass) {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(Config.WEATHER_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.client(okHttpClient).build();
+
+        return retrofit.create(serviceClass);
+    }
 }

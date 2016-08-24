@@ -57,8 +57,7 @@ public class TravelEventAdapter extends ArrayAdapter<String> {
 
         viewHolder.eventNameTV.setText(eventName.get(position));
         viewHolder.journeyDateTV.setText(journeyDate.get(position));
-        viewHolder.budgetAmountTV.setText(eventName.get(position));
-
+        viewHolder.budgetAmountTV.setText(budgetAmount.get(position));
         return convertView;
 
     }

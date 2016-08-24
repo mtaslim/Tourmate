@@ -22,8 +22,10 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ityadi.app.tourmate.ApiHelper.TravelEventApi;
+import com.ityadi.app.tourmate.ApiHelper.TravelEventUpdateApi;
 import com.ityadi.app.tourmate.ApiHelper.UserInfoApi;
 import com.ityadi.app.tourmate.Common.Config;
 import com.ityadi.app.tourmate.Common.InternetConnection;
@@ -33,9 +35,11 @@ import com.ityadi.app.tourmate.Common.SpreferenceHelper;
 import com.ityadi.app.tourmate.R;
 import com.ityadi.app.tourmate.Response.TravelEventResponse;
 import com.ityadi.app.tourmate.Response.UserInfoResponse;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,7 +68,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
-
 
         if (InternetConnection.checkConnection(getBaseContext())) {
             fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -103,18 +106,18 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     //Change elements in the header
                     View headerView = navigationView.getHeaderView(0);
                     TextView nameTV = (TextView) headerView.findViewById(R.id.nameTV);
-                    //CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image);
+                    CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image);
 
                     nameTV.setText(uName);
 
 
-                   /* if("".equals(uPhoto)) {
+                    if("".equals(uPhoto)) {
                        // uPhoto =
                     }
                     else {
                         String profile_image_url = Config.BASE_URL+"tourmate/photo/small/" + uPhoto;
                         Picasso.with(getApplicationContext()).load(profile_image_url).into(profile_image);
-                    }*/
+                    }
                 }
 
                 @Override
@@ -122,11 +125,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     Log.e("error", t.toString());
                 }
             });
-
-
-
-
-
 
             Calendar c = Calendar.getInstance();
             year = c.get(Calendar.YEAR);
@@ -140,12 +138,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
+        }*/
     }
 
     @Override
@@ -219,7 +217,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-            // TODO Auto-generated method stub
             // arg1 = year
             // arg2 = month
             // arg3 = day
@@ -236,14 +233,22 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
     };
 
-    public void CreateTravelEvent(View view) {
+
+    public void travelEventAddEdit(int travel_event_id){
         if (InternetConnection.checkConnection(getBaseContext())) {
-            thisLayout = findViewById(R.id.travel_event_fragment);
+
+            TravelEventApi travelEventApi;
+            TravelEventUpdateApi travelEventUpdateApi;
+            Call<TravelEventResponse> call;
+
+            if(travel_event_id == 0) thisLayout = findViewById(R.id.travel_event_fragment);
+            else thisLayout = findViewById(R.id.fragment_travel_event_details);
+
             EditText etEventName = (EditText) findViewById(R.id.etEventName);
             EditText etLocationCoverage = (EditText) findViewById(R.id.etLocationCoverage);
             EditText etBudgetAmount = (EditText) findViewById(R.id.etBudgetAmount);
             EditText etDescription = (EditText) findViewById(R.id.etDescription);
-            TextView tvDate = (TextView) findViewById(R.id.tvDate);
+            TextView etJourneyDate = (TextView) findViewById(R.id.etJourneyDate);
 
             String eventName, locationCoverage, budgetAmount, journeyDate, description;
 
@@ -251,7 +256,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             locationCoverage = etLocationCoverage.getText().toString();
             budgetAmount = etBudgetAmount.getText().toString();
             description = etDescription.getText().toString();
-            journeyDate = tvDate.getText().toString();
+            journeyDate = etJourneyDate.getText().toString();
 
             String req = "";
             if ("".equals(eventName)) req += "Event Name, ";
@@ -269,15 +274,20 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 progressDialog.setMessage("Please wait. Your data is storing...");
                 progressDialog.show();
 
-                TravelEventApi travelEventApi = Network.createService(TravelEventApi.class);
-                Call<TravelEventResponse> call = travelEventApi.getAccessToken(Config.APP_KEY, userName, eventName, locationCoverage, budgetAmount, journeyDate, description);
+                if(travel_event_id <= 0){
+                    travelEventApi = Network.createService(TravelEventApi.class); // add
+                    call = travelEventApi.getAccessToken(Config.APP_KEY, userName,eventName, locationCoverage, budgetAmount, journeyDate, description);
+                }
+                else{
+                    travelEventUpdateApi = Network.createService(TravelEventUpdateApi.class); //update
+                    call = travelEventUpdateApi.getAccessToken(Config.APP_KEY, userName,travel_event_id, eventName, locationCoverage, journeyDate, description);
+                }
 
                 call.enqueue(new Callback<TravelEventResponse>() {
                     @Override
                     public void onResponse(Call<TravelEventResponse> call, Response<TravelEventResponse> response) {
                         progressDialog.dismiss();
                         TravelEventResponse travelEventResponse = response.body();
-                        String userName = travelEventResponse.getEventName();
                         String msg = travelEventResponse.getMsg();
                         String err = travelEventResponse.getErr();
                         Snackbar.make(thisLayout, msg, Snackbar.LENGTH_LONG).show();
@@ -310,6 +320,28 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
+    public void CreateTravelEvent(View view) {
+        travelEventAddEdit(0);
+    }
+
+    public void updateTravelEvent(View view) {
+        TravelEventDetails travelEventDetails = new TravelEventDetails();
+        int id = Integer.parseInt(travelEventDetails.EVENT_ID);
+        if(id !=0) travelEventAddEdit(id);
+        else   Toast.makeText(getApplicationContext(),"Information did not match", Toast.LENGTH_LONG).show();
+    }
 
 
+    /*public void eventLocationWeather(View view) {
+        TravelEventDetails travelEventDetails = new TravelEventDetails();
+        String eventLocation = travelEventDetails.EVENT_LOCATION;
+
+        if("".equals(eventLocation)){
+            Toast.makeText(getApplicationContext(),"Location did not found.", Toast.LENGTH_LONG).show();
+        }
+        else {
+            //Task Here
+            //Toast.makeText(getApplicationContext(),eventLocation, Toast.LENGTH_LONG).show();
+        }
+    }*/
 }
