@@ -52,10 +52,11 @@
         android:id="@+id/photoView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:padding="5dp"
+        android:padding="2dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
+        android:background="@drawable/my_shape"
         android:src="@drawable/userimage"/>
     </LinearLayout>
 </RelativeLayout>

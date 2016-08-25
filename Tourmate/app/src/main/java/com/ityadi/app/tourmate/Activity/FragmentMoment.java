@@ -24,6 +24,7 @@ import com.ityadi.app.tourmate.Common.Config;
 import com.ityadi.app.tourmate.Common.InternetConnection;
 import com.ityadi.app.tourmate.Common.InternetConnectionHandler;
 import com.ityadi.app.tourmate.Common.Network;
+import com.ityadi.app.tourmate.Common.SpreferenceHelper;
 import com.ityadi.app.tourmate.PhotoLibrary.PhotoLibrary;
 import com.ityadi.app.tourmate.R;
 import com.ityadi.app.tourmate.Response.MomentResponse;
@@ -52,6 +53,8 @@ public class FragmentMoment extends Fragment {
     Call<MomentResponse> call;
 
     PhotoLibrary photoLibrary;
+    SpreferenceHelper spreferenceHelper;
+    String userName;
 
 
     public FragmentMoment() {
@@ -64,6 +67,9 @@ public class FragmentMoment extends Fragment {
         if (!InternetConnection.checkConnection(getActivity())){
             startActivity(new Intent(getActivity(), InternetConnectionHandler.class));
         }
+
+        spreferenceHelper = new SpreferenceHelper(getActivity());
+        userName = spreferenceHelper.retrive();
 
         View rootView = inflater.inflate(R.layout.fragment_moment, container, false);
         Bundle bundle = this.getArguments();
@@ -87,7 +93,6 @@ public class FragmentMoment extends Fragment {
                     photoView.setImageBitmap(myBitmap);
                 }
 
-
                 heading = etHeadinge.getText().toString();
                 expenseAmount = etExpenseApount.getText().toString();
                 description = etDescription.getText().toString();
@@ -107,19 +112,17 @@ public class FragmentMoment extends Fragment {
                     progressDialog.setMessage("Please wait. Your data is storing...");
                     progressDialog.show();
 
-
                     if(realPath!=""){
                         MomentApi momentApi = Network.createService(MomentApi.class);
                         file = new File(realPath);
                         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                         MultipartBody.Part body =  MultipartBody.Part.createFormData("uploaded_file", file.getName(), requestFile);
-                        call = momentApi.getAccessToken(Config.APP_KEY,EVENT_ID,heading,expenseAmount,description,body);
+                        call = momentApi.getAccessToken(Config.APP_KEY,userName,EVENT_ID,heading,expenseAmount,description,body);
                     }
                     else{
                         MomentApiWithoutPhoto momentApi = Network.createService(MomentApiWithoutPhoto.class);
                         call = momentApi.getAccessToken(Config.APP_KEY,EVENT_ID,heading,expenseAmount,description);
                     }
-
 
                     call.enqueue(new Callback<MomentResponse>() {
                         @Override
@@ -140,8 +143,6 @@ public class FragmentMoment extends Fragment {
                                         startActivity(i);
                                     }
                                 }, 2000);
-
-
                             }
                             else Snackbar.make(thisLayout,err,Snackbar.LENGTH_LONG).show();
                             Log.e("response", momentResponse.getMsg());
@@ -152,11 +153,7 @@ public class FragmentMoment extends Fragment {
                             Log.e("error", t.toString());
                         }
                     });
-
-
                 }
-
-
             }
         });
 

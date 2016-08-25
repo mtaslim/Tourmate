@@ -24,7 +24,7 @@ public class TravelEventDetails extends Fragment {
     public static String EVENT_LOCATION;
 
     EditText etEventName,etLocationCoverage,etBudgetAmount,etDescription;
-    Button eventLocationWeather,btnAaddMoment;
+    Button eventLocationWeather,btnAaddMoment,btnMomentList;
     TextView etJourneyDate;
     TextView tvCreatedAt;
     String selectedDate;
@@ -127,6 +127,15 @@ public class TravelEventDetails extends Fragment {
             }
         });
 
+        //add moment button onclick
+        btnMomentList = (Button) rootView.findViewById(R.id.btnMomentList);
+        btnMomentList.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                    Fragment fr = new MomentListFragment();
+                    FragmentManager frm = getFragmentManager();
+                    frm.beginTransaction().replace(R.id.fragment_container, fr).commit();
+            }
+        });
 
         ((Dashboard) getActivity()).setTitle("Travel Event Details");
         ((Dashboard) getActivity()).fab.hide();
