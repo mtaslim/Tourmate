@@ -15,13 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ityadi.app.tourmate.ApiHelper.CurrentWeatherApi;
-import com.ityadi.app.tourmate.ApiHelper.ForcastWeatherApi;
 import com.ityadi.app.tourmate.Common.CommonMethod;
 import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.Common.TempConvertor;
 import com.ityadi.app.tourmate.R;
 import com.ityadi.app.tourmate.Weather.CurrentWeatherArrayList;
-import com.ityadi.app.tourmate.Weather.WeatherForcats.ForcastWeatherArrayList;
 
 import java.io.InputStream;
 import java.util.Date;
@@ -104,7 +102,7 @@ public class WeatherFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<CurrentWeatherArrayList> call, Throwable t) {
-                //Toast.makeText(getBaseContext(),"Error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -112,29 +110,7 @@ public class WeatherFragment extends Fragment {
         // forcast Weather
 
 
-        ForcastWeatherApi forcastWeatherApi = Network.createWeatherService(ForcastWeatherApi.class);
-        Call<ForcastWeatherArrayList> forcastWeatherCall = forcastWeatherApi.getWeather("%"+location);
-        forcastWeatherCall.enqueue(new Callback<ForcastWeatherArrayList>() {
-            @Override
-            public void onResponse(Call<ForcastWeatherArrayList> call, Response<ForcastWeatherArrayList> response) {
-                //ForcastWeatherArrayList responseForcastBody=responseForcast.body();
-                if (response.isSuccessful()) {
-                    // use response data and do some fancy stuff :)
-                } else {
-                   /* // parse the response body …
-                    APIError error = ErrorUtils.parseError(response);
-                    // … and use it to show error information
 
-                    // … or just log the issue like we’re doing :)
-                    Log.d("error message", error.message());*/
-                }
-
-            }
-            @Override
-            public void onFailure(Call<ForcastWeatherArrayList> call, Throwable t) {
-                Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
 

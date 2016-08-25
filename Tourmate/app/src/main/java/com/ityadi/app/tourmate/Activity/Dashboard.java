@@ -4,8 +4,12 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -21,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +37,14 @@ import com.ityadi.app.tourmate.Common.InternetConnection;
 import com.ityadi.app.tourmate.Common.InternetConnectionHandler;
 import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.Common.SpreferenceHelper;
+import com.ityadi.app.tourmate.PhotoLibrary.PhotoLibrary;
 import com.ityadi.app.tourmate.R;
 import com.ityadi.app.tourmate.Response.TravelEventResponse;
 import com.ityadi.app.tourmate.Response.UserInfoResponse;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -62,6 +70,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     String CUR_DATE = "";
     private int year, month, day;
+    PhotoLibrary photoLibrary;
+    public Uri fileUri;
+    public String timeStamp,realPath="";
+    ImageView photoView;
 
 
     @Override
@@ -97,6 +109,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 @Override
                 public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
                     UserInfoResponse userInfoResponse = response.body();
+
+                    if("".equals(userInfoResponse.getName())){
+                        startActivity(new Intent(getBaseContext(), InternetConnectionHandler.class));
+                    }
                     uName = userInfoResponse.getName();
                     uEmail = userInfoResponse.getEmail();
                     uPhoto = userInfoResponse.getPhoto();
@@ -134,6 +150,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         else {
             startActivity(new Intent(getBaseContext(), InternetConnectionHandler.class));
         }
+        photoLibrary = new PhotoLibrary();
     }
 
     @Override
@@ -301,7 +318,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                                     Intent i = new Intent(getBaseContext(), Dashboard.class);
                                     startActivity(i);
                                 }
-                            }, 5000);
+                            }, 2000);
 
 
                         } else Snackbar.make(thisLayout, err, Snackbar.LENGTH_LONG).show();
@@ -330,6 +347,50 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         if(id !=0) travelEventAddEdit(id);
         else   Toast.makeText(getApplicationContext(),"Information did not match", Toast.LENGTH_LONG).show();
     }
+
+    public void captureImage(View view) {
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        fileUri = Uri.fromFile(photoLibrary.getOutputPhotoFile());
+        i.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        startActivityForResult(i, photoLibrary.RESULT_CAPTURE_IMAGE );
+    }
+
+    public void selectImage(View view) {
+        Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, photoLibrary.RESULT_LOAD_IMAGE);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if (requestCode == photoLibrary.RESULT_LOAD_IMAGE) {
+                if(data != null) {
+                    Uri selectedImage = data.getData();
+                    Bitmap bmp = null;
+                    try {
+                        bmp = photoLibrary.getBitmapFromUri(getBaseContext(),selectedImage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //photoView.setImageBitmap(bmp);
+                    Uri uri = photoLibrary.getImageUri(getBaseContext(), bmp);
+                    realPath =  photoLibrary.getRealPathFromURI(getBaseContext(),uri);
+                } // if(data != null)
+            }
+            else if (requestCode == photoLibrary.RESULT_CAPTURE_IMAGE){
+                realPath = String.valueOf(photoLibrary.getOutputPhotoFile());
+                File file = new File(realPath);
+                if(file.exists()){
+                    Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                    //photoView.setImageBitmap(myBitmap);
+                }
+            }
+        }
+
+
+    }
+
+
 
 
     /*public void eventLocationWeather(View view) {

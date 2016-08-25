@@ -24,7 +24,7 @@ public class TravelEventDetails extends Fragment {
     public static String EVENT_LOCATION;
 
     EditText etEventName,etLocationCoverage,etBudgetAmount,etDescription;
-    Button eventLocationWeather;
+    Button eventLocationWeather,btnAaddMoment;
     TextView etJourneyDate;
     TextView tvCreatedAt;
     String selectedDate;
@@ -108,6 +108,22 @@ public class TravelEventDetails extends Fragment {
                 fr.setArguments(bundle);
                 FragmentManager frm = getFragmentManager();
                 frm.beginTransaction().replace(R.id.fragment_container, fr).commit();
+            }
+        });
+
+        //add moment button onclick
+        btnAaddMoment = (Button) rootView.findViewById(R.id.btnAaddMoment);
+        btnAaddMoment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(Integer.parseInt(EVENT_ID) > 0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("eventId", EVENT_ID);
+
+                    Fragment fr = new FragmentMoment();
+                    fr.setArguments(bundle);
+                    FragmentManager frm = getFragmentManager();
+                    frm.beginTransaction().replace(R.id.fragment_container, fr).commit();
+                }
             }
         });
 

@@ -29,13 +29,15 @@
         <activity android:name=".Activity.SigninSignup" />
         <activity android:name=".Activity.UserSignIn" />
         <!-- UserSignIn -->
-        <activity android:name=".Activity.Dashboard"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"/>
+        <activity
+            android:name=".Activity.Dashboard"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout" />
         <activity
             android:name=".Common.InternetConnectionHandler"
             android:label="@string/title_activity_internet_connection_handler"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Common.TryingToConnectInternet"></activity>
+        <activity android:name=".Common.TryingToConnectInternet" />
+        <activity android:name=".Activity.FragmentMoment"></activity>
     </application>
 
 </manifest>

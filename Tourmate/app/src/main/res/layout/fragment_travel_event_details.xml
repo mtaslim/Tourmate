@@ -1,8 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_travel_event_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_travel_event_details"
     tools:context="com.ityadi.app.tourmate.Activity.TravelEventDetails">
 
     <ScrollView
@@ -13,87 +13,99 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="vertical"
+            android:layout_centerVertical="true"
             android:gravity="center"
-            android:layout_centerVertical="true">
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/my_shape">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:text="Event Name"
                     android:textSize="23dp"
                     />
                 <EditText
                     android:id="@+id/etEventName"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:textSize="23dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/my_shape">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:text="Location"
                     android:textSize="23dp"
                     />
                 <EditText
                     android:id="@+id/etLocationCoverage"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:textSize="23dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/my_shape">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:text="Description"
                     android:textSize="23dp"
                     />
                 <EditText
                     android:id="@+id/etDescription"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:textSize="23dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/my_shape">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:text="Journey Date"
                     android:textSize="23dp"
                     />
                 <TextView
                     android:id="@+id/etJourneyDate"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:textSize="23dp" />
             </LinearLayout>
 
@@ -101,21 +113,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/my_shape">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:text="Budget"
                     android:textSize="23dp"
                     />
                 <EditText
                     android:id="@+id/etBudgetAmount"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/symbol_tk"
                     android:inputType="number"
-                    android:layout_marginBottom="10dp"
+                    android:padding="10dp"
                     android:textSize="23dp" />
             </LinearLayout>
 
@@ -123,21 +139,23 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_shape">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
                     android:text="Created At"
                     android:textSize="23dp"
                     />
                 <TextView
                     android:id="@+id/tvCreatedAt"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:inputType="number"
-                    android:layout_marginBottom="10dp"
+                    android:padding="10dp"
                     android:textSize="23dp" />
             </LinearLayout>
 
@@ -146,32 +164,32 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:onClick="updateTravelEvent"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/update"
-                android:background="@drawable/my_shape"
-                android:textAllCaps="false"
-                android:textSize="23dp"
                 android:layout_margin="5dp"
-                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:background="@drawable/my_shape"
+                android:drawableLeft="@drawable/update"
+                android:onClick="updateTravelEvent"
                 android:padding="5dp"
-                android:text="Update"/>
+                android:text="Update"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="23dp"/>
 
             <Button
                 android:id="@+id/eventLocationWeather"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/weather"
-                android:background="@drawable/my_shape"
-                android:textAllCaps="false"
-                android:textSize="23dp"
                 android:layout_margin="5dp"
-                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:background="@drawable/my_shape"
+                android:drawableLeft="@drawable/weather"
                 android:padding="5dp"
-                android:text="Weather"/>
+                android:text="Weather"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="23dp"/>
 
         </LinearLayout>
 
@@ -180,32 +198,32 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:onClick="captureImage"
+                    android:id="@+id/btnAaddMoment"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/add_moment"
-                    android:background="@drawable/my_shape"
-                    android:textAllCaps="false"
-                    android:textSize="23dp"
                     android:layout_margin="5dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_weight="1"
+                    android:background="@drawable/my_shape"
+                    android:drawableLeft="@drawable/add_moment"
                     android:padding="5dp"
-                    android:text="Add Moment"/>
+                    android:text="Add Moment"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="23dp"/>
 
                 <Button
-                    android:onClick="captureImage"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/edit_moment"
-                    android:background="@drawable/my_shape"
-                    android:textAllCaps="false"
-                    android:textSize="23dp"
                     android:layout_margin="5dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_weight="1"
+                    android:background="@drawable/my_shape"
+                    android:drawableLeft="@drawable/edit_moment"
+                    android:onClick="captureImage"
                     android:padding="5dp"
-                    android:text="Moment List"/>
+                    android:text="Moment List"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="23dp"/>
 
 
 

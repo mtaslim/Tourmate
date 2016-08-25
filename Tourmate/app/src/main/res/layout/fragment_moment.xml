@@ -1,0 +1,137 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_moment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_horizontal_margin"
+    tools:context="com.ityadi.app.tourmate.Activity.FragmentMoment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="false">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/my_shape">
+                <EditText
+                    android:id="@+id/etHeadinge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Heading"
+                    android:padding="10dp"
+                    android:textSize="23dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/my_shape">
+                <EditText
+                    android:id="@+id/etExpenseApount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:hint="Expense Amount"
+                    android:drawableLeft="@drawable/symbol_tk"
+                    android:textSize="23dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_shape">
+                <EditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:hint="Description"
+                    android:padding="10dp"
+                    android:textSize="23dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:id="@+id/imageButton">
+                <Button
+                    android:id="@+id/btnCapturePicture"
+                    android:onClick="captureImage"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/camera"
+                    android:background="@drawable/my_shape"
+                    android:textAllCaps="false"
+                    android:textSize="20dp"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:text="Take Picture"/>
+
+                <Button
+
+                    android:id="@+id/btnGalleryPicture"
+                    android:onClick="selectImage"
+                    android:layout_toRightOf="@+id/btnCapturePicture"
+                    android:drawableLeft="@drawable/gallery"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:background="@drawable/my_shape"
+                    android:padding="5dp"
+                    android:textAllCaps="false"
+                    android:text="Gallery Picture"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageButton"
+                android:gravity="center"
+                android:id="@+id/imageView">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/photoView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:padding="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center_horizontal"
+                    android:src="@drawable/visiting_place"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnAddMoment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:layout_gravity="center"
+                android:text=" Add Moment"
+                android:padding="10dp"
+                android:textColor="#0175B0"
+                android:drawableLeft="@drawable/add_moment"
+                android:background="@drawable/my_shape"
+                android:textSize="25dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

@@ -8,7 +8,6 @@
      tools:context=".Activity.TravelEventListFragment">
 
     <LinearLayout
-        android:layout_marginTop="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/blue"
@@ -52,7 +51,7 @@
 
     <ListView
         android:id="@+id/travelEventListView"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="41dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 
