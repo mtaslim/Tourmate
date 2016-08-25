@@ -4,16 +4,19 @@ package com.ityadi.app.tourmate.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ityadi.app.tourmate.ApiHelper.MomentListApi;
 import com.ityadi.app.tourmate.Common.Config;
 import com.ityadi.app.tourmate.Common.InternetConnection;
 import com.ityadi.app.tourmate.Common.InternetConnectionHandler;
+import com.ityadi.app.tourmate.Common.MomentListAdapter;
 import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.Common.SpreferenceHelper;
 import com.ityadi.app.tourmate.R;
@@ -31,6 +34,7 @@ public class MomentListFragment extends Fragment {
     SpreferenceHelper spreferenceHelper;
     String userName;
     ListView list;
+    String eventId;
 
 
     public MomentListFragment() {
@@ -41,17 +45,22 @@ public class MomentListFragment extends Fragment {
                              Bundle savedInstanceState) {
         spreferenceHelper = new SpreferenceHelper(getActivity());
         userName = spreferenceHelper.retrive();
+
+        Bundle bundle = this.getArguments();
+        eventId = bundle.getString("eventId");
+
+
         //Internet checking for all Fragement
         if (!InternetConnection.checkConnection(getActivity())){
             startActivity(new Intent(getActivity(), InternetConnectionHandler.class));
         }
-        View view = inflater.inflate(R.layout.moment_list, container, false);
+        View convertView = inflater.inflate(R.layout.moment_list, container, false);
         ((Dashboard) getActivity()).setTitle("Moment List");
         ((Dashboard) getActivity()).fab.hide();
 
 
         MomentListApi momentListApi = Network.createService(MomentListApi.class);
-        Call<MomentListResponse> call = momentListApi.getMomentList(Config.APP_KEY,userName); //
+        Call<MomentListResponse> call = momentListApi.getMomentList(Config.APP_KEY,userName,eventId); //
 
         call.enqueue(new Callback<MomentListResponse>() {
             @Override
@@ -71,29 +80,27 @@ public class MomentListFragment extends Fragment {
                         expenseAmount.add(momentlList.getMomentList().get(i).getExpenseAmount());
                     }
 
-                   /* TravelEventAdapter adapter = new TravelEventAdapter(getActivity(), eventName, journeyDate, budgetAmount);
-                    list = (ListView) getView().findViewById(R.id.travelEventListView);
+                    MomentListAdapter adapter = new MomentListAdapter(getActivity(), heading, photo, expenseAmount);
+                    list = (ListView) getView().findViewById(R.id.momentListView);
                     list.setAdapter(adapter);
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        public void onItemClick(AdapterView<?> a, View v, int position,
-                                                long id) {
+                        public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 
                             Bundle bundle = new Bundle();
-                            bundle.putString("eventId", travelList.getTravelEvent().get(position).getId());
-                            bundle.putString("eventName", travelList.getTravelEvent().get(position).getEventName());
-                            bundle.putString("journeyDate", travelList.getTravelEvent().get(position).getJourneyDate());
-                            bundle.putString("locationCoverage", travelList.getTravelEvent().get(position).getLocationCoverage());
-                            bundle.putString("budgetAmount", travelList.getTravelEvent().get(position).getBudgetAmount());
-                            bundle.putString("description", travelList.getTravelEvent().get(position).getDescription());
-                            bundle.putString("createdAt", travelList.getTravelEvent().get(position).getCreatedAt());
-                            bundle.putString("updatedAt", travelList.getTravelEvent().get(position).getUpdatedAt());
+                            bundle.putString("momentId", momentlList.getMomentList().get(position).getId());
+                            bundle.putString("eventId", momentlList.getMomentList().get(position).getEventId());
+                            bundle.putString("heading", momentlList.getMomentList().get(position).getHeading());
+                            bundle.putString("description", momentlList.getMomentList().get(position).getDescription());
+                            bundle.putString("expenseAmount", momentlList.getMomentList().get(position).getExpenseAmount());
+                            bundle.putString("photo", momentlList.getMomentList().get(position).getPhoto());
+                            bundle.putString("createdAt", momentlList.getMomentList().get(position).getCreatedAt());
 
-                            Fragment fr = new TravelEventDetails();
+                            Fragment fr = new MomentDetails();
                             fr.setArguments(bundle);
                             FragmentManager frm = getFragmentManager();
                             frm.beginTransaction().replace(R.id.fragment_container, fr).commit();
                         }
-                    });*/
+                    });
                 }
                 /////
             }
@@ -109,7 +116,7 @@ public class MomentListFragment extends Fragment {
 
 
 
-        return view;
+        return convertView;
     }
 
     @Override

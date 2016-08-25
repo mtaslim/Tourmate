@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.ityadi.app.tourmate.ApiHelper.TotalExpenseApi;
 import com.ityadi.app.tourmate.Common.CommonMethod;
+import com.ityadi.app.tourmate.Common.Config;
 import com.ityadi.app.tourmate.Common.DisableUi;
 import com.ityadi.app.tourmate.Common.InternetConnection;
 import com.ityadi.app.tourmate.Common.InternetConnectionHandler;
+import com.ityadi.app.tourmate.Common.Network;
 import com.ityadi.app.tourmate.R;
+import com.ityadi.app.tourmate.Response.TotalExpenseResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class TravelEventDetails extends Fragment {
@@ -25,7 +34,7 @@ public class TravelEventDetails extends Fragment {
 
     EditText etEventName,etLocationCoverage,etBudgetAmount,etDescription;
     Button eventLocationWeather,btnAaddMoment,btnMomentList;
-    TextView etJourneyDate;
+    TextView etJourneyDate,totalExpenseTV;
     TextView tvCreatedAt;
     String selectedDate;
     DisableUi disableUi;
@@ -53,6 +62,27 @@ public class TravelEventDetails extends Fragment {
 
         EVENT_ID = bundle.getString("eventId");
         EVENT_LOCATION =  bundle.getString("locationCoverage");
+        totalExpenseTV = (TextView) rootView.findViewById(R.id.totalExpenseTV);
+        /////////////
+        TotalExpenseApi totalExpenseApi = Network.createService(TotalExpenseApi.class);
+        Call<TotalExpenseResponse> call = totalExpenseApi.getAccessToken(Config.APP_KEY,EVENT_ID);
+        call.enqueue(new Callback<TotalExpenseResponse>() {
+            @Override
+            public void onResponse(Call<TotalExpenseResponse> call, Response<TotalExpenseResponse> response) {
+                final TotalExpenseResponse responseBody = response.body();
+                if(responseBody != null) {
+                    if(!"".equals(responseBody.getTotal())){
+                        totalExpenseTV.setText(responseBody.getTotal());
+                    }
+
+                }
+            }
+            @Override
+            public void onFailure(Call<TotalExpenseResponse> call, Throwable t) {
+                Log.e("error", t.toString());
+            }
+        });
+        ///////////////////
 
         etEventName = (EditText) rootView.findViewById(R.id.etEventName);
         etJourneyDate = (TextView) rootView.findViewById(R.id.etJourneyDate);
@@ -131,7 +161,11 @@ public class TravelEventDetails extends Fragment {
         btnMomentList = (Button) rootView.findViewById(R.id.btnMomentList);
         btnMomentList.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("eventId", EVENT_ID);
+
                     Fragment fr = new MomentListFragment();
+                    fr.setArguments(bundle);
                     FragmentManager frm = getFragmentManager();
                     frm.beginTransaction().replace(R.id.fragment_container, fr).commit();
             }

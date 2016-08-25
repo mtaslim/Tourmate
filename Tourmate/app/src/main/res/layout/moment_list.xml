@@ -5,7 +5,8 @@
     android:layout_centerVertical="true"
     android:fitsSystemWindows="true"
     android:id="@+id/travel_event_list_fragment"
-    tools:context=".Activity.TravelEventListFragment">
+    tools:context=".Activity.MomentListFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,15 +15,14 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1.5"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:textSize="22dp"
             android:textColor="@color/white"
             android:gravity="center"
             android:textStyle="bold"
             android:padding="5dp"
-            android:text="Event"/>
+            android:text="Photo"/>
 
         <TextView
             android:layout_width="0dp"
@@ -34,7 +34,7 @@
             android:textColor="@color/white"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Date"/>
+            android:text="Heading"/>
 
         <TextView
             android:layout_width="0dp"
@@ -45,12 +45,12 @@
             android:textColor="@color/white"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Budget"/>
+            android:text="Amount"/>
 
     </LinearLayout>
 
     <ListView
-        android:id="@+id/travelEventListView"
+        android:id="@+id/momentListView"
         android:layout_marginTop="41dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>

@@ -3,12 +3,12 @@
     android:id="@+id/fragment_travel_event_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ityadi.app.tourmate.Activity.TravelEventDetails">
+    tools:context="com.ityadi.app.tourmate.Activity.MomentDetails">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="false">
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -18,6 +18,7 @@
             android:orientation="vertical"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
             android:paddingRight="10dp">
 
 
@@ -31,11 +32,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:text="Event Name"
+                    android:text="Moment ID"
                     android:textSize="23dp"
                     />
-                <EditText
-                    android:id="@+id/etEventName"
+                <TextView
+                    android:id="@+id/momentIdTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -53,11 +54,33 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:text="Location"
+                    android:text="Event Name"
                     android:textSize="23dp"
                     />
-                <EditText
-                    android:id="@+id/etLocationCoverage"
+                <TextView
+                    android:id="@+id/eventNameTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:textSize="23dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/my_shape">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Heading"
+                    android:textSize="23dp"
+                    />
+                <TextView
+                    android:id="@+id/headingTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -78,30 +101,8 @@
                     android:text="Description"
                     android:textSize="23dp"
                     />
-                <EditText
-                    android:id="@+id/etDescription"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    android:textSize="23dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/my_shape">
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    android:text="Journey Date"
-                    android:textSize="23dp"
-                    />
-                <TextView
-                    android:id="@+id/etJourneyDate"
+                    android:id="@+id/descriptionTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -121,42 +122,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:text="Budget"
-                    android:textSize="23dp"
+                    android:text="Expence Amount"
+                    android:textSize="21dp"
                     />
-                <EditText
-                    android:id="@+id/etBudgetAmount"
+                <TextView
+                    android:id="@+id/expenseAmountTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/symbol_tk"
                     android:inputType="number"
                     android:padding="10dp"
-                    android:textSize="23dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/my_shape">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    android:text="Total Expense"
-                    android:textSize="23dp"
-                    />
-                <TextView
-                    android:id="@+id/totalExpenseTV"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/symbol_tk"
-                    android:inputType="number"
-                    android:padding="10dp"
-                    android:text="0"
                     android:textSize="23dp" />
             </LinearLayout>
 
@@ -175,7 +151,7 @@
                     android:textSize="23dp"
                     />
                 <TextView
-                    android:id="@+id/tvCreatedAt"
+                    android:id="@+id/createdAtTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -184,68 +160,33 @@
                     android:textSize="23dp" />
             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:src="@drawable/visiting_place"/>
+            </LinearLayout>
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/my_shape"
-                android:drawableLeft="@drawable/update"
-                android:onClick="updateTravelEvent"
-                android:padding="5dp"
-                android:text="Update"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="23dp"/>
-
-            <Button
-                android:id="@+id/eventLocationWeather"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/my_shape"
-                android:drawableLeft="@drawable/weather"
-                android:padding="5dp"
-                android:text="Weather"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="23dp"/>
-
-        </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/btnAaddMoment"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/my_shape"
-                    android:drawableLeft="@drawable/add_moment"
-                    android:padding="5dp"
-                    android:text="Add Moment"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="23dp"/>
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
                 <Button
                     android:id="@+id/btnMomentList"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:layout_weight="1"
                     android:background="@drawable/my_shape"
                     android:drawableLeft="@drawable/edit_moment"
-                    android:padding="5dp"
-                    android:text="Moment List"
+                    android:padding="10dp"
+                    android:text=" Moment List"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="23dp"/>
