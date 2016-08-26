@@ -141,6 +141,7 @@ public class FragmentMoment extends Fragment {
 
                             if(!"".equals(msg)){
                                 Snackbar.make(thisLayout,msg,Snackbar.LENGTH_SHORT).show(); //msg
+
                                 //notification
                                 if(notify ==1) {
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

@@ -58,5 +58,23 @@ public class CommonMethod {
         return sdt;
     }
 
+   /* public String getEventName(String EVENT_ID) {
+        final String[] eventName = new String[1];
+        EventNameApi eventNameApi = Network.createService(EventNameApi.class);
+        Call<EventNameResponse> call = eventNameApi.getEventName(Config.APP_KEY,EVENT_ID);
+        call.enqueue(new Callback<EventNameResponse>() {
+            @Override
+            public void onResponse(Call<EventNameResponse> call, Response<EventNameResponse> response) {
+                final EventNameResponse enResponseBody = response.body();
+                eventName[0] = enResponseBody.getEvent_name();
+            }
+            @Override
+            public void onFailure(Call<EventNameResponse> call, Throwable t) {
+                Log.e("error", t.toString());
+            }
+        });
+        return eventName[0];
+    }*/
+
 
 }

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ityadi.app.tourmate.ApiHelper.EventNameApi;
+import com.ityadi.app.tourmate.Common.CommonMethod;
 import com.ityadi.app.tourmate.Common.Config;
 import com.ityadi.app.tourmate.Common.InternetConnection;
 import com.ityadi.app.tourmate.Common.InternetConnectionHandler;
@@ -33,6 +34,7 @@ public class MomentDetails extends Fragment {
 
     public static String EVENT_ID;
     public String eventName;
+    CommonMethod commonMethod;
 
 
     public MomentDetails() {
@@ -51,6 +53,7 @@ public class MomentDetails extends Fragment {
         //get data from previous list and set in UI
         Bundle bundle = this.getArguments();
         EVENT_ID = bundle.getString("eventId");
+        commonMethod = new CommonMethod();
         /////////////
         EventNameApi eventNameApi = Network.createService(EventNameApi.class);
         Call<EventNameResponse> call = eventNameApi.getEventName(Config.APP_KEY,EVENT_ID);
@@ -68,6 +71,7 @@ public class MomentDetails extends Fragment {
                 Log.e("error", t.toString());
             }
         });
+        //eventNameTV.setText(commonMethod.getEventName(EVENT_ID));
         ///////////////////
         momentIdTV = (TextView) rootView.findViewById(R.id.momentIdTV);
         eventNameTV = (TextView) rootView.findViewById(R.id.eventNameTV);
