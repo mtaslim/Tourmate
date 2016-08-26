@@ -82,6 +82,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         setContentView(R.layout.dashboard);
 
         if (InternetConnection.checkConnection(getBaseContext())) {
+
+            photoLibrary = new PhotoLibrary();
             fab = (FloatingActionButton) findViewById(R.id.fab);
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -109,7 +111,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 @Override
                 public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
                     UserInfoResponse userInfoResponse = response.body();
-
+                    if(userInfoResponse == null){
+                        Toast.makeText(getApplicationContext(),"Server not responding. Please try later.", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getBaseContext(), InternetConnectionHandler.class));
+                    }
                     if("".equals(userInfoResponse.getName())){
                         startActivity(new Intent(getBaseContext(), InternetConnectionHandler.class));
                     }
@@ -150,7 +155,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         else {
             startActivity(new Intent(getBaseContext(), InternetConnectionHandler.class));
         }
-        photoLibrary = new PhotoLibrary();
     }
 
     @Override

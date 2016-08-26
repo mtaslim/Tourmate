@@ -71,18 +71,21 @@ public class UserSignIn extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                         UserResponse userResponse = response.body();
-                        String userName = userResponse.getUsername();
-
-                        String msg = userResponse.getMsg();
-                        String err = userResponse.getErr();
-
-                        if("1".equals(msg)){
-                            spreferenceHelper.save(userName);
-                            Intent i = new Intent(getBaseContext(), Dashboard.class);
-                            startActivity(i);
+                        if(userResponse == null){
+                            Snackbar.make(signinLayout,"Server not responding. Please try later.", Snackbar.LENGTH_LONG).show();
                         }
-                        else{
-                            Snackbar.make(signinLayout,err, Snackbar.LENGTH_LONG).show();
+                       else {
+                            String userName = userResponse.getUsername();
+                            String msg = userResponse.getMsg();
+                            String err = userResponse.getErr();
+
+                            if ("1".equals(msg)) {
+                                spreferenceHelper.save(userName);
+                                Intent i = new Intent(getBaseContext(), Dashboard.class);
+                                startActivity(i);
+                            } else {
+                                Snackbar.make(signinLayout, err, Snackbar.LENGTH_LONG).show();
+                            }
                         }
                     }
                     @Override
