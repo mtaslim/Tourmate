@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ityadi.app.tourmate">
-
+<!-- package="com.example.android.multidex.myapplication" -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:name="android.support.multidex.MultiDexApplication"
         android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <!-- android:theme="@style/CustomTheme"> -->
         <activity android:name=".Activity.SplashScreen">
@@ -37,7 +42,11 @@
             android:label="@string/title_activity_internet_connection_handler"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Common.TryingToConnectInternet" />
-        <activity android:name=".Activity.FragmentMoment"></activity>
+        <!-- <activity android:name=".Activity.FragmentMoment" /> -->
+        <activity
+            android:name=".Activity.MapsActivity"
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

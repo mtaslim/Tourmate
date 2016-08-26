@@ -201,19 +201,22 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
 
         else if (id == R.id.nav_nearby) {
-            GalleryFragment fragment = new GalleryFragment();
+            Intent i = new Intent(getBaseContext(), MapsActivity.class);
+            startActivity(i);
+
+            /*GalleryFragment fragment = new GalleryFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
 
-        } else if (id == R.id.nav_weather) {
+        } /*else if (id == R.id.nav_weather) {
             //Intent i = new Intent(getBaseContext(), UserAccountCreation.class);
             // startActivity(i);
 
         } else if (id == R.id.nav_my_profile) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

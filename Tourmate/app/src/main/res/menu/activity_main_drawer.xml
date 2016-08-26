@@ -5,20 +5,18 @@
         android:checkableBehavior="single">
         <item android:id="@+id/nav_travel_list_event" android:icon="@drawable/ic_travel_event"
             android:title="Travel Event" />
+
         <item android:id="@+id/nav_nearby" android:icon="@drawable/ic_nearby"
             android:title="Nearby" />
-        <item android:id="@+id/nav_weather" android:icon="@drawable/ic_weather"
+        <!--<item android:id="@+id/nav_weather" android:icon="@drawable/ic_weather"
             android:title="Weather" />
+        -->
     </group>
-
+<!--
     <group
         android:id="@+id/menu_bottom"
         android:checkableBehavior="all">
         <item android:id="@+id/nav_my_profile" android:icon="@drawable/ic_user"
             android:title="My Profile" />
-        <!--
-        <item android:id="@+id/nav_sign_out" android:icon="@drawable/ic_logout"
-            android:title="Signout" />
-        -->
-    </group>
+    </group> -->
 </menu>

@@ -12,5 +12,6 @@
     <string name="action_signout">Signout</string>
     <string name="email_invalid">Email is not valid.</string>
     <string name="title_activity_internet_connection_handler">InternetConnectionHandler</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>
